@@ -1,2 +1,25 @@
-<h1>Admin::Products　index#show</h1>
-<p>Find me in app/views/admin/products　index/show.html.erb</p>
+<h4>商品詳細</h4>
+ <%= image_tag @product.get_image, size:"150x150" %>
+ <table>
+   <tr>
+     <td>商品名</td>
+     <td><%= @product.name %></td>
+   </tr>
+   <tr>
+     <td>商品説明</td>
+     <td><%= @product.introduction %></td>
+   </tr>
+   <tr>
+     <td>ジャンル</td>
+     <td><%= @product.product_genre.name %></td>
+   </tr>
+   <tr>
+     <td>税込価格<br>(税抜価格)</td>
+     <td><%= @product.add_tax_price.to_s(:delimited) %>円(<%= @product.price.to_s(:delimited) %>円)</td>
+   </tr>
+   <tr>
+     <td>販売ステータス</td>
+     <td><%= @product.is_sale ? '販売中' : '売切れ' %></td>
+   </tr>
+ </table>
+ <%= link_to '編集する', edit_admin_product_path(@product), class: "btn btn-sm btn-success" %>
