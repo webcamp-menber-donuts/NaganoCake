@@ -11,6 +11,44 @@
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
+        <button class="nav-item" >
+          <%= link_to 'logo', "/" %>
+        </button>
+        <ul class="navbar-nav ml-auto">
+          <button class="nav-item" >
+            <%= link_to 'About', "/about" %>
+          </button>
+          <button class="nav-item">
+            <%= link_to '商品一覧', products_path %>
+          </button>
+          <button class="nav-item">
+            <%= link_to "新規登録", "/" %>
+          </button>
+          <button class="nav-item">
+            <%= link_to "ログイン", "/" %>
+          </button>
+        </ul>
+        <!--検索フォーム-->
+        <%= form_tag("/", :method => "get") do %>
+         <%= text_field_tag :search %> 
+        <%= submit_tag "Search" ,:username => nil ,class: "button is-info"%> 
+        <% end %> 
+      </nav>
+
+    </header>
+            
     <%= yield %>
+    
+     <footer class="navbar navbar-dark bg-dark text-white">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <p>ながのCAKE</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
