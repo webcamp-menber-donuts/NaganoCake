@@ -23,7 +23,17 @@
           </tbody>
           
         </table>
-         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        <br>
+        <p>※作業用に仮で置いてます</p>
+         <%= link_to "会員一覧", admin_customers_path, method: :get %><br>
+         <%= link_to "会員詳細", "/admin/customers/1", method: :get %><br>
+         <%= link_to "会員情報編集", "/admin/customers/1/edit", method: :get %>
+         <% if admin_signed_in? %>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+          </li>
+         <% end %>
+         
         </div>
     </div>
 </div>
