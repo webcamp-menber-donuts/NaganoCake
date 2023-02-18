@@ -12,14 +12,55 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark text-white">
-        <button class="nav-item" >
-          <%= link_to 'logo', "/" %>
+      <nav class="navbar navbar-expand-md bg-dark">
+        <button>
+          <% if admin_signed_in? %>
+            <%= link_to 'NaganoCAKE', "admin_root_path" %>
+          <% else %>
+            <%= link_to 'NaganoCAKE', "/" %>
+          <% end %>
         </button>
         
-        <ul class="navbar-nav ml-auto">
-          <button class="nav-item" >
-            <%= link_to 'About', "/about" %>
+        <ul class="nav navbar-nav ml-auto">
+          <% if customer_signed_in? %>
+          <!--顧客がログインしているとき-->
+          <p>ようこそ、<%= current_customer.last_name %>さん！</p>
+          
+          <button class="nav-item">
+            <%= link_to "マイページ", customers_my_page_path %>
+          </button>
+          <button class="nav-item">
+            <%= link_to '商品一覧', products_path %>
+          </button>
+          <button class="nav-item">
+            <%= link_to 'カート', carts_path %>
+          </button>
+          <button class="nav-item">
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+          </button>
+          
+          <% elsif admin_signed_in? %>
+          <!--管理者がログインしているとき-->
+          <button class="nav-item">
+            <%= link_to '商品一覧', products_path %>
+          </button>
+          <button class="nav-item">
+            <%= link_to "会員一覧", admin_customers_path %>
+          </button>
+          <button class="nav-item">
+            <%= link_to "注文履歴一覧", admin_root_path %>
+          </button>
+          <button class="nav-item">
+            <%= link_to "ジャンル一覧", admin_product_genres_path %>
+          </button>
+          <button class="nav-item">
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+          </button>
+              
+          <% else %>
+            <!--ログインしていないとき-->
+          <button class="nav-item">
+            <%= link_to "About", about_path %>
           </button>
           <button class="nav-item">
             <%= link_to '商品一覧', products_path %>
@@ -28,13 +69,14 @@
             <%= link_to "新規登録", new_customer_registration_path %>
           </button>
           <button class="nav-item">
-            <% if customer_signed_in? %>
-              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-            <% else %>
-              <%= link_to "ログイン", new_customer_session_path %>
-            <% end %>
+            <%= link_to "ログイン", new_customer_session_path %>
           </button>
+        <% end %>
+          
+          
+          
         </ul>
+        
         <!--検索フォーム-->
         <%= form_tag("/", :method => "get") do %>
          <%= text_field_tag :search %> 
@@ -49,7 +91,7 @@
      <footer class="navbar navbar-dark bg-dark text-white">
       <div class="container">
         <div class="row">
-          <div class="col">
+          <div class="col m-auto">
             <p>ながのCAKE</p>
           </div>
         </div>
