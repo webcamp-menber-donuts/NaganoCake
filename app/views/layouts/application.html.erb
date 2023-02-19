@@ -21,67 +21,68 @@
           <% end %>
         </button>
         
-        <ul class="nav navbar-nav ml-auto">
-          <% if customer_signed_in? %>
-          <!--顧客がログインしているとき-->
-          <p>ようこそ、<%= current_customer.last_name %>さん！</p>
-          
-          <button class="nav-item">
-            <%= link_to "マイページ", customers_my_page_path %>
-          </button>
-          <button class="nav-item">
-            <%= link_to '商品一覧', products_path %>
-          </button>
-          <button class="nav-item">
-            <%= link_to 'カート', carts_path %>
-          </button>
-          <button class="nav-item">
-          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-          </button>
-          
-          <% elsif admin_signed_in? %>
-          <!--管理者がログインしているとき-->
-          <button class="nav-item">
-            <%= link_to '商品一覧', products_path %>
-          </button>
-          <button class="nav-item">
-            <%= link_to "会員一覧", admin_customers_path %>
-          </button>
-          <button class="nav-item">
-            <%= link_to "注文履歴一覧", admin_root_path %>
-          </button>
-          <button class="nav-item">
-            <%= link_to "ジャンル一覧", admin_product_genres_path %>
-          </button>
-          <button class="nav-item">
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-          </button>
-              
-          <% else %>
-            <!--ログインしていないとき-->
-          <button class="nav-item">
-            <%= link_to "About", about_path %>
-          </button>
-          <button class="nav-item">
-            <%= link_to '商品一覧', products_path %>
-          </button>
-          <button class="nav-item">
-            <%= link_to "新規登録", new_customer_registration_path %>
-          </button>
-          <button class="nav-item">
-            <%= link_to "ログイン", new_customer_session_path %>
-          </button>
-        <% end %>
-          
-          
-          
-        </ul>
+        <div class='collapse navbar-collapse flex-column'>
+          <ul class='nav navbar-nav ml-auto'>
+            <% if customer_signed_in? %>
+            <!--顧客がログインしているとき-->
+            <p>ようこそ、<%= current_customer.last_name %>さん！</p>
+            
+            <button class='nav-item'>
+              <%= link_to "マイページ", customers_my_page_path %>
+            </button>
+            <button class='nav-item'>
+              <%= link_to '商品一覧', products_path %>
+            </button>
+            <button class='nav-item'>
+              <%= link_to 'カート', carts_path %>
+            </button>
+            <button class='nav-item'>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+            </button>
+            
+            <% elsif admin_signed_in? %>
+            <!--管理者がログインしているとき-->
+            <button class='nav-item'>
+              <%= link_to '商品一覧', products_path %>
+            </button>
+            <button class='nav-item'>
+              <%= link_to "会員一覧", admin_customers_path %>
+            </button>
+            <button class='nav-item'>
+              <%= link_to "注文履歴一覧", admin_root_path %>
+            </button>
+            <button class='nav-item'>
+              <%= link_to "ジャンル一覧", admin_product_genres_path %>
+            </button>
+            <button class='nav-item'>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+            </button>
+                
+            <% else %>
+              <!--ログインしていないとき-->
+            <button class='nav-item'>
+              <%= link_to "About", about_path %>
+            </button>
+            <button class='nav-item'>
+              <%= link_to '商品一覧', products_path %>
+            </button>
+            <button class='nav-item'>
+              <%= link_to "新規登録", new_customer_registration_path %>
+            </button>
+            <button class='nav-item'>
+              <%= link_to "ログイン", new_customer_session_path %>
+            </button>
+            <% end %>
+          </ul>
         
-        <!--検索フォーム-->
-        <%= form_tag("/", :method => "get") do %>
-         <%= text_field_tag :search %> 
-        <%= submit_tag "Search" ,:username => nil ,class: "button is-info"%> 
-        <% end %> 
+          <!--検索フォーム-->
+          <div>
+          <%= form_tag("/", :method => "get") do %>
+           <%= text_field_tag :search %> 
+          <%= submit_tag "Search" ,:username => nil ,class: "button is-info"%> 
+          <% end %>
+          </div>
+        </div>
       </nav>
 
     </header>

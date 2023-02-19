@@ -1,24 +1,23 @@
-# README
+# naganoCAKE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ながのCAKEへ、ようこそ！
+こちらは長野県にある小さな洋菓子店「ながのCAKE」の商品を通販するためのECサイトです。
 
-Things you may want to cover:
+> DMM WEBCAMP のチーム開発用のECサイトですので、
+>
+> 残念ながらケーキは買えません。
 
-* Ruby version
+## 開発環境
+Ruby on Rails
 
-* System dependencies
+## 開発者
+チーム名
+**ドーナツ同好会**
+メンバー
+-かいくん
+-じゅんじゅん
+-くせちゃん
+-ゆうさん
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 制作期間
+2023/2/12～2023/2/28
