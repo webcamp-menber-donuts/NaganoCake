@@ -1,43 +1,43 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h2>userさんの会員詳細</h2>
-            <table>
+            <h2><%= @customer.last_name%><%= @customer.fast_name %>さんの会員詳細</h2>
+            <table class="table">
                 <tr>
                     <th>会員ID</th>
-                    <td></td>
+                    <td><%= @customer.id %></td>
                 </tr>
                 <tr>
                     <th>氏名</th>
-                    <td></td>
+                    <td><%= @customer.last_name %><%= @customer.fast_name %></td>
                 </tr>
                 <tr>
                     <th>フリガナ</th>
-                    <td></td>
+                    <td><%= @customer.kana_last_name %><%= @customer.kana_fast_name %></td>
                 </tr>
                 <tr>
                     <th>郵便番号</th>
-                    <td></td>
+                    <td><%= @customer.postal_code %></td>
                 </tr>
                 <tr>
                     <th>住所</th>
-                    <td></td>
+                    <td><%= @customer.address %></td>
                 </tr>
                 <tr>
                     <th>電話番号</th>
-                    <td></td>
+                    <td><%= @customer.telephone_number %></td>
                 </tr>
                 <tr>
                     <th>メールアドレス</th>
-                    <td></td>
+                    <td><%= @customer.email %></td>
                 </tr>
                 <tr>
                     <th>会員ステータス</th>
-                    <td></td>
+                    <td><%= @customer.is_deleted %></td>
                 </tr>
             </table>
-            <button>編集する</button>
-            <button>注文履歴一覧を見る</button>
+            <%= link_to "編集する",edit_admin_customer_path(@customer),class:'btn btn-success mb-2' %>
+            <%= link_to "注文履歴一覧を見る","/admin",class:'btn btn-success mb-2' %>
         </div>
     </div>
 </div>
