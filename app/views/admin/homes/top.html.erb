@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <h2>注文履歴一覧</h2>
-        <table>
+        <table class="table">
           <thead>
             <tr>
                 <th>購入日時</th>   
@@ -13,13 +13,15 @@
           </thead>
                         
           <tbody>
+              <% @customers.each do |customer| %>
             <tr>
                 <!--仮で置いてます-->
-                <th>2023/2/1 12:00:00</th>
-                <th>山田花子</th>
-                <th>1</th>
-                <th>入金待ち</th>
+                <th><%#= customer.orders.created_at %>※注文日時</th>
+                <th><%= customer.last_name %><%= customer.fast_name %></th>
+                <th><%#= customer.customer.order_details.quantity %>※注文個数</th>
+                <th><%#= customer.customer.order_status. %>※注文ステータス</th>
             </tr>
+            <% end %>
           </tbody>
           
         </table>
@@ -27,11 +29,11 @@
         <p>※作業用に仮で置いてます</p>
          <%= link_to "会員一覧", admin_customers_path, method: :get %><br>
          <%= link_to "会員詳細", "/admin/customers/1", method: :get %><br>
-         <%= link_to "会員情報編集", "/admin/customers/1/edit", method: :get %>
+         <%= link_to "会員情報編集", "/admin/customers/1/edit", method: :get %><br>
          <% if admin_signed_in? %>
-          <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-          </li>
+          adminとしてログイン中<%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+          <% else %>
+          ログインしていません<%= link_to "adminログインページへ", "/admin/sign_in" %>
          <% end %>
          
         </div>
