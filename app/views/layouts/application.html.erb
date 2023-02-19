@@ -43,7 +43,7 @@
             <% elsif admin_signed_in? %>
             <!--管理者がログインしているとき-->
             <button class='nav-item'>
-              <%= link_to '商品一覧', products_path %>
+              <%= link_to '商品一覧', adminproducts_path %>
             </button>
             <button class='nav-item'>
               <%= link_to "会員一覧", admin_customers_path %>
