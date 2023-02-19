@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_17_024159) do
+ActiveRecord::Schema.define(version: 2023_02_19_040849) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2023_02_17_024159) do
     t.string "quantity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "customer_id"
+    t.integer "product_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -84,6 +86,8 @@ ActiveRecord::Schema.define(version: 2023_02_17_024159) do
     t.integer "order_price", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "order_id"
+    t.integer "product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -96,6 +100,7 @@ ActiveRecord::Schema.define(version: 2023_02_17_024159) do
     t.integer "order_status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "customer_id"
   end
 
   create_table "product_genres", force: :cascade do |t|
@@ -111,6 +116,7 @@ ActiveRecord::Schema.define(version: 2023_02_17_024159) do
     t.boolean "is_sale", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "product_genre_id"
   end
 
   create_table "shopping_addresses", force: :cascade do |t|
@@ -119,6 +125,7 @@ ActiveRecord::Schema.define(version: 2023_02_17_024159) do
     t.string "address", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "customer_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
