@@ -1,2 +1,37 @@
-<h1>Public::Products#show</h1>
-<p>Find me in app/views/public/products/show.html.erb</p>
+<div class="container">
+    <h3>商品詳細</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <!--部分レイアウトで作成する-->
+            　　<table class="table">
+                <thead>
+                    <tr>ジャンル検索</tr>
+                </thead>
+                <tbody>
+                    <% @product_genres.each do |product_genre| %>
+                    <tr>
+                        <th>
+                            <%= link_to "/" do %>
+                            <%= product_genre.name %>
+                            <% end %>
+                        </th>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col">
+                        <%= image_tag @product.get_image %>
+                    </div>
+                    <div class="col">
+                        商品名：<%= @product.name %><br>
+                        商品説明：<%= @product.introduction %><br>
+                        値段：¥<%= @product.price %>(税込)
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+                        

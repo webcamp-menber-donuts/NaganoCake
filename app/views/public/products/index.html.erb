@@ -1,17 +1,35 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <h3>ジャンル検索</h3>
+        <div class="col-md-2">
+            <table class="table">
+                <!--部分レイアウトで作成する-->
+                <thead>
+                    <tr>ジャンル検索</tr>
+                </thead>
+                <tbody>
+                    <% @product_genres.each do |product_genre| %>
+                    <tr>
+                        <th>
+                            <%= link_to "/" do %>
+                            <%= product_genre.name %>
+                            <% end %>
+                        </th>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
         </div>
+            
         
-        <div class="col-md-9">
-            <h3>商品一覧（全X件）</h3>
-            商品名
-            <%# @products.each do |product| %>
-                <%#= image_tag %>
-                <%#= product.name %>
-                <%#= product.introduction %>
-            <%# end %>
+        <div class="col-md-9 offset-1">
+            <h3>商品一覧（全<%= Product.count %>件）</h3>
+            <% @products.each do |product| %>
+                    <%= image_tag product.get_image, size: '150x150' %>
+                    <%= link_to product_path(product) do %>
+                        <%= product.name %>
+                    <% end %>
+                    ¥<%= product.price %>
+            <% end %>
         </div>
     </div>
 </div>
