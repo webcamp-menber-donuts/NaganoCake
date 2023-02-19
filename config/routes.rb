@@ -6,7 +6,7 @@ devise_for :customers,skip: [:passwords], controllers: {
   sessions: 'public/sessions'
 }
 scope module: :public do
-  get "/" => "homes#top"
+  root to "homes#top"
   get "/about" => "homes#about"
   resources :products, only: [:index, :show]
   get "customers/my_page" => "customers#show"
