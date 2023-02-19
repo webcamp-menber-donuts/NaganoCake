@@ -1,11 +1,17 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            ジャンル検索
+            <h3>ジャンル検索</h3>
         </div>
         
         <div class="col-md-9">
-            商品一覧
+            <h3>商品一覧（全X件）</h3>
+            商品名
+            <%# @products.each do |product| %>
+                <%#= image_tag %>
+                <%#= product.name %>
+                <%#= product.introduction %>
+            <%# end %>
         </div>
     </div>
 </div>
