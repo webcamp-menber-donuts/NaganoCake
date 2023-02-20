@@ -6,7 +6,7 @@ devise_for :customers,skip: [:passwords], controllers: {
   sessions: 'public/sessions'
 }
 scope module: :public do
-  root to "homes#top"
+  root to: "homes#top"
   get "/about" => "homes#about"
   resources :products, only: [:index, :show]
   get "customers/my_page" => "customers#show"
@@ -34,6 +34,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
    resources :orders, only: [:show, :update]
    resources :order_details, only: [:update]
   end
-  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
