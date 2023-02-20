@@ -7,7 +7,7 @@ class Public::CartsController < ApplicationController
    elsif @cart.save!
     redirect_to carts_path
    elsif
-    redirect_to root_path
+    redirect_to root_path #フラッシュメッセージつけて商品詳細に戻りたい
    else
     redirect_to new_customer_session_path
    end
