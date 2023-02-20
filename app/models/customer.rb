@@ -3,6 +3,8 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  has_many :orders, dependent: :destroy
 
   validates :last_name, :fast_name,:email,:address, presence: true #空白でない
   validates :kana_last_name, :kana_fast_name, presence: true, format: {with: /\A[ァ-ヶー－]+\z/ } #カタカナのみ
