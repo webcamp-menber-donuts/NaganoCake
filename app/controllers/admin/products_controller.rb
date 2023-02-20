@@ -6,9 +6,9 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
      if  @product.save
-       redirect_to admin_product_path(@product)
+       redirect_to shopping_address_path
      else
-       render :new
+       render :index
      end
   end
 
