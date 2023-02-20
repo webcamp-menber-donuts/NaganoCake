@@ -1,12 +1,16 @@
 class Public::CartsController < ApplicationController
 
   def create
+   if customer_signed_in?
+    @cart = Cart.create(customer_id: current_customer.id)
     @cart = Cart.new(cart_params)
-    if @cart.save
-     redirect_to carts_path
-    else
-     render :create
-    end
+   elsif @cart.save!
+    redirect_to carts_path
+   elsif
+    redirect_to root_path
+   else
+    redirect_to new_customer_session_path
+   end
   end
 
   def index
