@@ -23,8 +23,9 @@
             </tr>
             <% end %>
           </tbody>
-          
         </table>
+            <%= paginate @customers %>
+          
         <br>
         <p>※作業用に仮で置いてます</p>
          <%= link_to "会員一覧", admin_customers_path, method: :get %><br>

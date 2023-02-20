@@ -13,8 +13,8 @@
           </thead>
                         
           <tbody>
+            <% @customers.each do |customer| %>
             <tr>
-              <% @customers.each do |customer| %>
                 <th><%= customer.id %></th>
                 <th>
                   <%= link_to admin_customer_path(customer) do %>
@@ -22,13 +22,12 @@
                   <% end %>
                 </th>
                 <th><%= customer.email %></th>
-                <th><%= customer.is_deleted %></th>
-              <% end %>
+                <th><%= customer.is_deleted ? '退会' : '有効' %></th>
             </tr>
+            <% end %>
           </tbody>
-          
         </table>
-              ページネーション
+          <%= paginate @customers %>
         </div>
     </div>
 </div>
