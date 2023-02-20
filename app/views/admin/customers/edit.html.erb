@@ -36,11 +36,16 @@
                     </tr>
                     <tr>
                         <th><%= f.label :会員ステータス %></th>
-                        <td><%= f.radio_button(:is_deleted, 1) %>有効<%= f.radio_button(:is_deleted, 2) %>退会</td>
+                        <td>
+                            <%= f.radio_button :is_deleted, false %>
+                            <%= f.label :is_deleted, '有効', value: false %>
+                            <%= f.radio_button :is_deleted, true %>
+                            <%= f.label :is_deleted, '退会', value: true %>
+                        </td>
                     </tr>
                     <tr>
                         <th></th>
-                        <th><%= f.submit "変更を保存", class:'btn btn-success mb-2' %></th>
+                        <th><%= f.submit "変更を保存",method: :patch, class:'btn btn-success mb-2' %></th>
                     </tr>
                 <% end %>
                

@@ -1,2 +1,75 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<div class="container">
+    <h3>注文詳細履歴</h3>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr>
+                    <th>購入者</th>
+                    <td>name</td>
+                </tr>
+                <tr>
+                    <th>注文日</th>
+                    <td>date</td>
+                </tr>
+                <tr>
+                    <th>配送先</th>
+                    <td>住所</td>
+                </tr>
+                <tr>
+                    <th>支払い方法</th>
+                    <td>銀行振込</td>
+                </tr>
+                <tr>
+                    <th>注文ステータス</th>
+                    <td>入金待ち 更新</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table">
+          <thead>
+            <tr>
+                <th>商品名</th>   
+                <th>単価（税込）</th>
+                <th>数量</th>
+                <th>小計</th>
+                <th>制作ステータス</th>
+            </tr>
+          </thead>
+                        
+          <tbody>
+              <%# @customers.each do |customer| %>
+            <tr>
+                <!--仮で置いてます-->
+                <th><%#= customer.orders.created_at %>※商品名</th>
+                <th><%#= customer.last_name %><%#= customer.fast_name %>※500</th>
+                <th><%#= customer.customer.order_details.quantity %>※5</th>
+                <th><%#= customer.customer.order_status. %>※2500</th>
+                <th>※着手不可</th>
+                <th>更新</th>
+            </tr>
+            <%# end %>
+          </tbody>
+        </table>
+        </div>
+        <div class="col-md-3 offset-1">
+            <table class="table">
+                <tr>
+                    <th>商品合計</th>
+                    <td>2500円</td>
+                </tr>
+                <tr>
+                    <th>送料</th>
+                    <td>800円</td>
+                </tr>
+                <tr>
+                    <th>請求金額合計</th>
+                    <td>3300円</td>
+                </tr>
+            </table>
+        </div>
+            
+    </div>
+</div>

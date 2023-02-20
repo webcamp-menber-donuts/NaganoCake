@@ -16,13 +16,13 @@ class Public::CustomersController < ApplicationController
     end
   end
 
-  def withdrawal_check
-    # @customer = current_customer
-    # if @customer.update(is_deleted: true)
-    #   reset_session
-    #   flash[:notice] = "ながのCAKEを退会しました"
-    #   redirect_to "/"
-    # end
+  def withdrawal
+    @customer = current_customer
+    if @customer.update(is_deleted: true)
+      reset_session
+      flash[:notice] = "ながのCAKEを退会しました"
+      redirect_to new_customer_registration_path
+    end
   end
   
   
