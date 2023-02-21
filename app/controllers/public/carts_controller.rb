@@ -4,13 +4,13 @@ class Public::CartsController < ApplicationController
    if customer_signed_in?
     @cart = Cart.create(customer_id: current_customer.id)
     @cart = Cart.new(cart_params)
-   elsif @cart.save!
-    redirect_to carts_path
-   elsif
-    redirect_to root_path #フラッシュメッセージつけて商品詳細に戻りたい
-   else
-    redirect_to new_customer_session_path
-   end
+    @cart.save
+    redirect_to carts_path(current_customer)
+    elsif
+     render :create
+    else
+    
+    end
   end
 
   def index
