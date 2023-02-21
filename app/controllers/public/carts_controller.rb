@@ -5,7 +5,9 @@ class Public::CartsController < ApplicationController
     if @cart.save
      redirect_to carts_path
     else
-     render :create
+     @product = Product.find(params[:cart][:product_id])
+     @product_genres = ProductGenre.all
+     render template: "public/products/show"
     end
   end
 
@@ -15,6 +17,6 @@ class Public::CartsController < ApplicationController
   private
    #ストロングパラメータ
    def cart_params
-    params.require(:cart).permit(:quantity)
+    params.require(:cart).permit(:quantity, :customer_id, :product_id)
    end
 end
