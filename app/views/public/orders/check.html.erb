@@ -4,4 +4,66 @@
     <h3>注文情報確認画面</h3>
   </div>
   
+  <div class='row'>
+    <div class='col-7'>
+      <table class='table'>
+        <thead class='table-secondary'>
+          <tr>
+            <th>商品</th>
+            <th>単価(税込)</th>
+            <th>個数</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @carts.each do |cart| %>
+          <tr>
+            <td><%= cart.product.name %></td>
+            <td><%= cart.product.add_tax_price %></td>
+            <td><%= cart.quantity %></td>
+            <td><%= cart.subtotal %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class='col-3'>
+        <table class='table'>
+          <tr>
+            <td class='table-secondary'>商品合計</td>
+            <td><%= @total %></td>
+          </tr>
+          <tr>
+            <td class='table-secondary'>送料</td>
+            <td><%= @postage %></td>
+          </tr>
+          <tr>
+            <td class='table-secondary'>ご請求額</td>
+            <td><%= @order.total_payment %></td>
+          </tr>
+        </table>
+      </div>
+  </div>
+  
+  <div class='row'>
+    <h4>支払方法</h4>
+    <%#= @Order.payment_method %>
+
+  </div>
+  
+  <div class='row'>
+    <h4>お届け先</h4>
+    <%= @order.postal_code %><%= @order.address %><%= @order.name %>
+  </div>
+  
+  <div class='row'>
+    <%= form_with model: @order, url: orders_path, local: true do |f| %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :address %>
+      <%= f.hidden_field :total_price, value: @total %>
+      <%= f.submit "注文を確定する" %>
+    <% end %>
+</div>
+  
 </div>

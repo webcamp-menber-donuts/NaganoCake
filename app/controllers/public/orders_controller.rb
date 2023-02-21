@@ -1,36 +1,64 @@
 class Public::OrdersController < ApplicationController
   
   def new
-    #@order = Order.new 新規の注文idを取得
-    #@order.customer_id = current_customer.id #customer_idを渡す
-    #@shopping_addresses = shopping_addresses.where(customer: current_customer) #customerが持っている配送先を取り出し
+    @order = Order.new
     
-    #if @order(order_params,shopping_addresses)
+    #if @order(order_params)
       #redirect_to orders_check_path(@order)
     #else
-      #render 'new'
+     # render 'new'
     #end
   end
-  
+
   def check
+    @order = Order.new(order_params)
     
-    #カートを合計し請求額などを合計して
-    #@postage = 800
-    #@order.total_payment = 
-    #@order.save
+    if params[:order][:address_number] == "1"
+      @order.name = current_customer.full_name
+      @order.postal_code = current_customer.postal_code
+      @order.address = current_customer.address
+      
+    elsif params[:order][:address_number] == "2"
+      #if Address.exists?(name: params[:order][:shopping_addresses])
+      @order.name = ShoppingAddress.find(params[:order][:registered]).name
+      @order.postal_code = ShoppingAddress.find(params[:order][:registered]).postal_code
+      @order.address = ShoppingAddress.find(params[:order][:registered]).address
+     
+    elsif params[:order][:address_number] == "3"
+      shopping_addresses = current_customer.addresses.new(address_params)
+      @order.name = :name
+      @order.postal_code = current_customer.postal_code
+      @order.address = current_customer.addressす
+    end
     
-    #@carts = current_customer.carts
-    #@carts.each do |cart|
-      #OrderDetail.create(
-        #order: @order
-        #product: cart.product_id
-        #product_status: 0
-        #quantity: cart.quantity
-        #order_price: @sub_price(cart))
-    #end
-    
-    #render "thanx"
-    #@cart_items.destroy_all カートを空にする
+    #カートの計算
+    @carts = current_customer.carts.all
+    @total = @carts.inject(0) { |sum, item| sum + item.subtotal }
+    @postage = 800
+    @order.total_payment = @total + @postage
+  end
+  
+  def create
+    @order = current_customer.orders.new(order_params)
+    if @order.save
+      
+    else
+      render :new
+    end  
+  
+    #カートから注文詳細へ移し替え
+    carts = current_customer.carts.all
+    carts.each do |cart|
+      OrderDetail.create(
+        order_id: @order.id,
+        product_id: cart.product_id,
+        quantity: cart.quantity,
+        order_price: cart.sub_price
+      )
+    end
+ 
+    carts.destroy_all #カートを空にする
+    render "thanx"
   end
   
   def thanx
@@ -48,11 +76,11 @@ class Public::OrdersController < ApplicationController
   private
     
     def order_params
-      params.require(:order).permit(:customer_id, :payment_method)
+      params.require(:order).permit(:payment_method, :postal_code, :address, :name)
     end
     
-    def shopping_addresses_params
-      #お届け先追加のとき
-    end
+    #def shopping_addresses_params
+      #params.require(:order).permit(:customer_id, :payment_method)
+    #end
   
 end

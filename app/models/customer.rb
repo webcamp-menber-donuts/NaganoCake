@@ -8,6 +8,11 @@ class Customer < ApplicationRecord
   has_many :carts
 
   has_many :shopping_addresses, dependent: :destroy
+  
+  #フルネーム
+  def full_name
+  last_name + ' ' + fast_name
+  end
 
   validates :last_name, :fast_name,:email,:address, presence: true #空白でない
   validates :kana_last_name, :kana_fast_name, presence: true, format: {with: /\A[ァ-ヶー－]+\z/ } #カタカナのみ
