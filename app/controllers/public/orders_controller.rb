@@ -1,8 +1,9 @@
 class Public::OrdersController < ApplicationController
   
   def new
-    #@order = Order.new 新規の注文idを取得
-    #@order.customer_id = current_customer.id #customer_idを渡す
+    @order = Order.new
+    @order.customer_id = current_customer.id #customer_idを渡す
+    #@my_addresses = current_customer #モデルにつくる？
     #@shopping_addresses = shopping_addresses.where(customer: current_customer) #customerが持っている配送先を取り出し
     
     #if @order(order_params,shopping_addresses)
@@ -19,13 +20,15 @@ class Public::OrdersController < ApplicationController
     #@order.total_payment = 
     #@order.save
     
-    #@carts = current_customer.carts
+    #カートから注文詳細へ移し替え
+    #@customer = current_customer
+    #@carts = @customer.carts
     #@carts.each do |cart|
       #OrderDetail.create(
-        #order: @order
-        #product: cart.product_id
-        #product_status: 0
-        #quantity: cart.quantity
+        #order: @order,
+        #product: cart.product_id,
+        #product_status: 0,
+        #quantity: cart.quantity,
         #order_price: @sub_price(cart))
     #end
     
