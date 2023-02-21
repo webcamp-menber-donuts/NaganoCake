@@ -19,11 +19,11 @@ class Public::OrdersController < ApplicationController
       @order.address = current_customer.address
       
     elsif params[:order][:address_number] == "2"
-      #if Address.exists?(name: params[:order][:shopping_addresses])
-      @order.name = ShoppingAddress.find(params[:order][:registered]).name
-      @order.postal_code = ShoppingAddress.find(params[:order][:registered]).postal_code
-      @order.address = ShoppingAddress.find(params[:order][:registered]).address
-     
+      @order.name = ShoppingAddress.find(params[:order][:shopping_addresses]).name
+      @order.postal_code = ShoppingAddress.find(params[:order][:shopping_addresses]).postal_code
+      @order.address = ShoppingAddress.find(params[:order][:shopping_addresses]).address
+
+
     elsif params[:order][:address_number] == "3"
       shopping_addresses = current_customer.addresses.new(address_params)
       @order.name = :name

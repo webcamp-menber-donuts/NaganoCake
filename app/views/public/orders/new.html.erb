@@ -22,7 +22,7 @@
     <!--customerの情報をデフォルトで取り込む-->
     <div class='row flex-column ml-4 mb-2'>
       <div>
-        <%= f.radio_button :addresses_number, 1 %>
+        <%= f.radio_button :address_number, 1 %>
         <%= f.label :ご自身の住所 %>
       </div>
       <div>
@@ -34,7 +34,7 @@
     <!--customerの配送先をプルダウンで選んで取り込む-->
     <div class='row flex-column ml-4 mb-2'>
       <div>
-      <%= f.radio_button :addresses_number, 2 %>
+      <%= f.radio_button :address_number, 2 %>
       <%= f.label :登録住所から探す %>
       </div>
       <div>
@@ -45,7 +45,7 @@
     <!--新規配送用フォーム-->
     <div class='row flex-column ml-4 mb-2'>
       <div>
-      <%= f.radio_button :addresses_number, 3 %>
+      <%= f.radio_button :address_number, 3 %>
       <%= f.label :新しいお届け先 %>
       </div>
       <div>

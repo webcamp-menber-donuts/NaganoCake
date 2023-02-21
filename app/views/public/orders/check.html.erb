@@ -46,13 +46,13 @@
       </div>
   </div>
   
-  <div class='row'>
+  <div class='row flex-column'>
     <h4>支払方法</h4>
-    <%#= @Order.payment_method %>
+    <%= @order.payment_method_i18n %>
 
   </div>
   
-  <div class='row'>
+  <div class='row flex-column'>
     <h4>お届け先</h4>
     <%= @order.postal_code %><%= @order.address %><%= @order.name %>
   </div>
