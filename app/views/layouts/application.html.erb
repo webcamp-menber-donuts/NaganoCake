@@ -20,13 +20,13 @@
             <%= link_to 'NaganoCAKE', root_path %>
           <% end %>
         </button>
-        
+
         <div class='collapse navbar-collapse flex-column'>
           <ul class='nav navbar-nav ml-auto'>
             <% if customer_signed_in? %>
             <!--顧客がログインしているとき-->
             <p>ようこそ、<%= current_customer.last_name %>さん！</p>
-            
+
             <button class='nav-item'>
               <%= link_to "マイページ", customers_my_page_path %>
             </button>
@@ -39,7 +39,7 @@
             <button class='nav-item'>
             <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
             </button>
-            
+
             <% elsif admin_signed_in? %>
             <!--管理者がログインしているとき-->
             <button class='nav-item'>
@@ -57,7 +57,7 @@
             <button class='nav-item'>
             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
             </button>
-                
+
             <% else %>
               <!--ログインしていないとき-->
             <button class='nav-item'>
@@ -74,21 +74,21 @@
             </button>
             <% end %>
           </ul>
-        
+
           <!--検索フォーム-->
           <div>
           <%= form_tag("/", :method => "get") do %>
-           <%= text_field_tag :search %> 
-          <%= submit_tag "Search" ,:username => nil ,class: "button is-info"%> 
+           <%= text_field_tag :search %>
+          <%= submit_tag "Search" ,:username => nil ,class: "button is-info"%>
           <% end %>
           </div>
         </div>
       </nav>
 
     </header>
-            
+
     <%= yield %>
-    
+
      <footer class="navbar navbar-dark bg-dark text-white">
       <div class="container">
         <div class="row">
