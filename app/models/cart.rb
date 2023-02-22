@@ -6,4 +6,9 @@ class Cart < ApplicationRecord
     product.add_tax_price * (quantity.to_i)
   end
 
+  ## 小計を求めるメソッド
+def subtotal
+    product.with_tax_price * (quantity.to_i)
+end
+
 end
