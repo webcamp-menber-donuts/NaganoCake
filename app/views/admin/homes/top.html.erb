@@ -15,8 +15,7 @@
           <tbody>
               <% @customers.each do |customer| %>
             <tr>
-                <!--仮で置いてます-->
-                <th><%#= customer.orders.created_at %>※注文日時</th>
+                <th><%#= link_to customer.orders.created_at, @order.created_at %>※注文日時</th>
                 <th><%= customer.last_name %><%= customer.fast_name %></th>
                 <th><%#= customer.customer.order_details.quantity %>※注文個数</th>
                 <th><%#= customer.customer.order_status. %>※注文ステータス</th>
