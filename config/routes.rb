@@ -19,6 +19,7 @@ scope module: :public do
   resources :orders, only: [:new, :create, :index, :show]
   get "orders/check" => "orders#check"
   get "orders/thanx" => "orders#thanx"
+  resources :orders, only: [:new, :create, :index, :show]
   resources :shopping_addresses, only: [:index, :edit, :create,:update, :destroy]
  end
 # 管理者用

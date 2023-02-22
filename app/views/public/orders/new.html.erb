@@ -1,37 +1,71 @@
 <div class='container'>
     
-  <div class='row'>
     <h3>注文情報入力</h3>
-  </div>
+
+  <!--if current_customer.cart.present?カートがあるか確認-->
   
-<%= form_with model: @order, local: true do |f| %>
+<%= form_with model: @order, url: orders_check_path, method: :post, local: true do |f| %>
   
   <h5>支払方法</h5>
   <div class='row flex-column ml-4 mb-2'>
     <div>
      <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
-     <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card], value: Order.payment_methods.key(0) %>
+     <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
     </div>
     <div>
       <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
-      <%= f.label :payment_method, Order.payment_methods_i18n[:transfer], value: Order.payment_methods.key(1) %>
+      <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer] %>
     </div>
   </div>
   
   <h5>お届け先</h5>
-  <div class='row'>
     <!--customerの情報をデフォルトで取り込む-->
-    <!--customerの配送先をプルダウンで選んで取り込む-->
-    <!--フォーム内に新規配送用フォームを作る-->
-  </div>
+    <div class='row flex-column ml-4 mb-2'>
+      <div>
+        <%= f.radio_button :address_number, 0 %>
+        <%= f.label :ご自身の住所 %>
+      </div>
+      <div>
+        〒<%= current_customer.postal_code %><%= current_customer.address %><br>
+        <%= current_customer.full_name %>
+      </div>
+    </div>
+    
+    <!--customerの配送先をセレクトボックスで選んで取り込む-->
+    <div class='row flex-column ml-4 mb-2'>
+      <div>
+      <%= f.radio_button :address_number, 1 %>
+      <%= f.label :登録住所から探す %>
+      </div>
+      <div>
+        <%= f.select :shopping_addresses, options_from_collection_for_select(@shopping_addresses, :id, :address_display) %>
+      </div>
+    </div>
+    
+    <!--新規配送用フォーム-->
+    <div class='row flex-column ml-4 mb-2'>
+      <div>
+      <%= f.radio_button :address_number, 2 %>
+      <%= f.label :新しいお届け先 %>
+      </div>
+      <div>
+        <%= f.label :郵便番号（ハイフンなし） %>
+        <%= f.text_field :postal_code, placeholder:"0000000" %>
+      </div>
+      <div>
+        <%= f.label :住所 %>
+        <%= f.text_field :address %>
+      </div>
+      <div>
+        <%= f.label :宛名 %>
+        <%= f.text_field :name %>
+      </div>
+    </div>
   
-  <div>
+    <div class='row'>
     <%= f.submit :"確認画面へ進む", class:'btn btn-info' %>
+    </div>
+  <% end %>
   </div>
-<% end %>
-</div>
 
-<a href="orders_check_path">確認画面リンク(作業用)</a>
-<a href="orders_thanx_path">thanx画面リンク(作業用)</a>
-<a href="orders_path">注文一覧画面リンク(作業用)</a>
-<a href="order_path">注文詳細画面リンク(作業用)</a>
+</div>
