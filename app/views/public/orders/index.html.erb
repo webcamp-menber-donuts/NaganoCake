@@ -1,9 +1,9 @@
 <div class='container'>
-    
+
   <div class='row'>
     <h3>注文履歴一覧</h3>
   </div>
-  
+
   <div class='row'>
     <table class='table'>
       <thead class='table-secondary'>
@@ -20,7 +20,7 @@
         <% @orders.each do |order| %>
         <tr>
           <td><% order.created_at.strftime('%Y/%m/%d') %></td>
-          <td>〒<%= order.postal_code %><br><%= order.address %><br><%= order.mane %></td>
+          <td>〒<%= order.postal_code %><br><%= order.address %><br><%= order.name %></td>
           <td>order.idを持つorder_detailの商品名のみ羅列</td>
           <td><%= order.total_payment %>円</td>
           <td><%= order.order_status %></td>
@@ -30,6 +30,6 @@
       </tbody>
     </table>
   </div>
-  
-  
+
+
 </div>
