@@ -16,8 +16,7 @@ scope module: :public do
   patch "customers/withdrawal" => "customers#withdrawal"
   delete "carts/destroy_all" => "carts#destroy_all"
   resources :carts, only: [:index, :update, :create, :destroy]
-  resources :orders, only: [:new, :create, :index, :show]
-  get "orders/check" => "orders#check"
+  post "orders/check" => "orders#check"
   get "orders/thanx" => "orders#thanx"
   resources :orders, only: [:new, :create, :index, :show]
   resources :shopping_addresses, only: [:index, :edit, :create,:update, :destroy]

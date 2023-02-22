@@ -1,43 +1,47 @@
-<div class="container">
-    <h3>商品詳細</h3>
-        <div class="row">
-            <div class="col-md-4">
-                <!--部分レイアウトで作成する-->
-              <table class="table">
-                <thead>
-                    <tr>ジャンル検索</tr>
-                </thead>
-                <tbody>
-                    <% @product_genres.each do |product_genre| %>
-                    <tr>
-                        <th>
-                            <%= link_to "/" do %>
-                            <%= product_genre.name %>
-                            <% end %>
-                        </th>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
-            </div>
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col">
-                        <%= image_tag @product.get_image %>
-                    </div>
-                    <div class="col">
-                        商品名：<%= @product.name %><br>
-                        商品説明：<%= @product.introduction %><br>
-                        値段：¥<%= @product.price %>(税込)
-                    </div>
-                </div>
-            </div>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-2">
+      <!--部分レイアウトで作成する-->
+      <table class="table">
+        <thead>
+          <tr>ジャンル検索</tr>
+        </thead>
+        <tbody>
+          <% @product_genres.each do |product_genre| %>
+          <tr>
+            <th>
+              <%= link_to "/" do %>
+                <%= product_genre.name %>
+              <% end %>
+            </th>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="col-4">
+      <%= image_tag @product.get_image, size: '320x240' %>
+    </div>
+      
+    <div class="col-6">
+      <h4><strong><%= @product.name %></strong></h4>
+      <p><%= @product.introduction %></p><br>
+      
+        <h4 class='row my-4'>¥<%= @product.price.to_s :delimited %>(税込)</h4>
+        
+        <%= form_with model: @cart,url: carts_path, local: true do |f| %>
+        <div class='row my-4'>
+          <div class='col-4'>
+            <%= f.select :quantity, *[1..10] %><%= f.label :個 %>
+            <%= f.hidden_field :customer_id, :value => current_customer.id %>
+            <%= f.hidden_field :product_id, :value => @product.id %>
+          </div>
+          <div class='col-4'>
+            <%= f.submit :カートに入れる, class: 'btn btn-success' %>
+          </div>
+          <% end %>
         </div>
+    </div>
+  </div>
 </div>
-
-<%= form_with model: @cart,url: carts_path, local: true do |f| %>
- <%= f.select :quantity, *[1..10] %><%= f.label :個 %>
- <%= f.hidden_field :customer_id, :value => current_customer.id %>
- <%= f.hidden_field :product_id, :value => @product.id %>
- <%= f.submit :カートに入れる, class: 'btn btn-success' %>
-<% end %>
