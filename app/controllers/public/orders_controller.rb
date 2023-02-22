@@ -2,44 +2,37 @@ class Public::OrdersController < ApplicationController
   
   def new
     @order = Order.new
-    
-    #if @order(order_params)
-      #redirect_to orders_check_path(@order)
-    #else
-     # render 'new'
-    #end
+     @shopping_addresses = current_customer.shopping_addresses
   end
 
   def check
     @order = Order.new(order_params)
     
-    if params[:order][:address_number] == "1"
+    if params[:order][:address_number] == "0"
       @order.name = current_customer.full_name
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
-      
-    elsif params[:order][:address_number] == "2"
+    elsif params[:order][:address_number] == "1"
       @order.name = ShoppingAddress.find(params[:order][:shopping_addresses]).name
       @order.postal_code = ShoppingAddress.find(params[:order][:shopping_addresses]).postal_code
       @order.address = ShoppingAddress.find(params[:order][:shopping_addresses]).address
-
-
-    elsif params[:order][:address_number] == "3"
-      shopping_addresses = current_customer.addresses.new(address_params)
+    elsif params[:order][:address_number] == "2"
+      @order = ShoppingAddresses.new(shopping_address_params)
       @order.name = :name
       @order.postal_code = current_customer.postal_code
-      @order.address = current_customer.addressす
+      @order.address = current_customer.address
     end
     
     #カートの計算
     @carts = current_customer.carts.all
     @total = @carts.inject(0) { |sum, item| sum + item.subtotal }
     @postage = 800
-    @order.total_payment = @total + @postage
+    @total_payment = @total + @postage
   end
   
   def create
-    @order = current_customer.orders.new(order_params)
+    @postage = 800
+    @order =Order.new(order_params)
     if @order.save
       
     else
@@ -65,22 +58,22 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    #@orders = current_customer.orders
+    @orders = current_customer.orders
   end
 
   def show
-    #@order = Order.find(params[:id])
-    #@order_details = @order.order_details
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
   end
 
   private
     
     def order_params
-      params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+      params.require(:order).permit(:name, :postal_code, :address, :total_payment, :payment_method)
     end
     
-    #def shopping_addresses_params
-      #params.require(:order).permit(:customer_id, :payment_method)
-    #end
+    def shopping_address_params
+    params.require(:shopping_address).permit(:name, :postal_code, :address)
+  end
   
 end
