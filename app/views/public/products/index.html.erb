@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container m-5">
     <div class="row">
         <div class="col-md-2">
             <table class="table">
@@ -20,16 +20,17 @@
             </table>
         </div>
             
-        
         <div class="col-md-9 offset-1">
-            <h3>商品一覧（全<%= Product.count %>件）</h3>
-            <% @products.each do |product| %>
-                    <%= image_tag product.get_image, size: '150x150' %>
-                    <%= link_to product_path(product) do %>
-                        <%= product.name %>
+            <h4>商品一覧（全 <%= Product.count %> 件）</h4>
+                <div class="row">
+                    <% @products.each do |product| %>
+                        <div class="col-md-3">
+                            <%= image_tag product.get_image, size: '200x150' %>
+                            <p><%= link_to product_path(product) do %><%= product.name %><% end %></p>
+                            <p>¥<%= product.price %></p>
+                        </div>
                     <% end %>
-                    ¥<%= product.price %>
-            <% end %>
+                </div>
         </div>
     </div>
 </div>

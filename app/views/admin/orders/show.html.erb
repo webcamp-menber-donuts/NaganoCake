@@ -1,27 +1,38 @@
 <div class="container">
-    <h3>注文詳細履歴</h3>
+    <div class="row m-4">
+        <h4>注文詳細履歴</h4>
+    </div>
     <div class="row">
         <div class="col">
             <table class="table">
                 <tr>
                     <th>購入者</th>
-                    <td>name</td>
+                    <td><%#= @customer.name %></td>
                 </tr>
                 <tr>
                     <th>注文日</th>
-                    <td>date</td>
+                    <td><%#= @order.created_at %></td>
                 </tr>
                 <tr>
                     <th>配送先</th>
-                    <td>住所</td>
+                    <td>
+                        <%#= @order.address %>
+                        <%#= @orser.name %>
+                    </td>
                 </tr>
                 <tr>
                     <th>支払い方法</th>
-                    <td>銀行振込</td>
+                    <td><%#= @order.payment_method %></td>
                 </tr>
                 <tr>
                     <th>注文ステータス</th>
-                    <td>入金待ち 更新</td>
+                    <td>
+                        <%#= form_with model: @order do |f| %>
+                            <%#= f.select :order_status, [["入金待ち", "入金待ち"], ["入金済み", "入金済み"], include_blank: "選択して下さい" %>
+                            <%#= f.submit '送信'%>
+                        <%# end %>
+                        <%#= 　%>更新
+                    </td>
                 </tr>
             </table>
         </div>
@@ -43,12 +54,22 @@
               <%# @customers.each do |customer| %>
             <tr>
                 <!--仮で置いてます-->
-                <th><%#= customer.orders.created_at %>※商品名</th>
-                <th><%#= customer.last_name %><%#= customer.fast_name %>※500</th>
-                <th><%#= customer.customer.order_details.quantity %>※5</th>
-                <th><%#= customer.customer.order_status. %>※2500</th>
-                <th>※着手不可</th>
-                <th>更新</th>
+                <th><%#= @product.name %>※商品名</th>
+                <th><%#= @product.price %>※500</th>
+                <th><%#= @order_details.quantity %>※5</th>
+                <th><%#=  %>※2500</th>
+                <th>
+                    <!--プルダウン-->
+                    <%#= form_with model: @order_datails do |f| %>
+                        <%#= f.select :product_status, [["", ""], ["", ""], include_blank: "選択して下さい" %>
+                        <%#= f.submit '送信'%>
+                    <%# end %>
+                    ※着手不可
+                </th>
+                <th>更新
+                    <%#= form_with model:@order_details, url:"admin/orders/:id", local:true,method: :patch do |f| %>
+                    <%#= f.submit "更新",method: :patch, class:'btn btn-success' %>
+                </th>
             </tr>
             <%# end %>
           </tbody>
