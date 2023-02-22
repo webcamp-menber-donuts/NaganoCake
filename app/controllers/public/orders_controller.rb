@@ -2,7 +2,7 @@ class Public::OrdersController < ApplicationController
   
   def new
     @order = Order.new
-     @shopping_addresses = current_customer.shopping_addresses
+    @shopping_addresses = current_customer.shopping_addresses
   end
 
   def check
@@ -17,10 +17,12 @@ class Public::OrdersController < ApplicationController
       @order.postal_code = ShoppingAddress.find(params[:order][:shopping_addresses]).postal_code
       @order.address = ShoppingAddress.find(params[:order][:shopping_addresses]).address
     elsif params[:order][:address_number] == "2"
-      @order = ShoppingAddresses.new(shopping_address_params)
-      @order.name = :name
-      @order.postal_code = current_customer.postal_code
-      @order.address = current_customer.address
+      @shopping_address = ShoppingAddress.new
+      @shopping_address.name = @order.name
+      @shopping_address.postal_code = @order.postal_code
+      @shopping_address.address = @order.address
+      @shopping_address.customer_id = current_customer.id
+      @shopping_address.save
     end
     
     #カートの計算
@@ -31,12 +33,13 @@ class Public::OrdersController < ApplicationController
   end
   
   def create
-    @postage = 800
     @order =Order.new(order_params)
+    @order.postage = 800
+    @order.customer_id = current_customer.id
     if @order.save
-      
+      redirect_to orders_thanx_path
     else
-      render :new
+     render :new
     end  
   
     #カートから注文詳細へ移し替え
@@ -44,14 +47,13 @@ class Public::OrdersController < ApplicationController
     carts.each do |cart|
       OrderDetail.create(
         order_id: @order.id,
-        product_id: cart.product_id,
+        product_id: cart.product.id,
         quantity: cart.quantity,
-        order_price: cart.sub_price
+        order_price: cart.product.add_tax_price
       )
     end
  
     carts.destroy_all #カートを空にする
-    render "thanx"
   end
   
   def thanx
@@ -62,8 +64,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    @order_details = @order.order_details
+    #@order = Order.find(params[:id])
+    #@order_details = @order.order_details
   end
 
   private
@@ -73,7 +75,7 @@ class Public::OrdersController < ApplicationController
     end
     
     def shopping_address_params
-    params.require(:shopping_address).permit(:name, :postal_code, :address)
-  end
+      params.require(:shopping_address).permit(:name, :postal_code, :address)
+    end
   
 end

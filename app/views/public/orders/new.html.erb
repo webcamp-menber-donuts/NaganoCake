@@ -38,7 +38,7 @@
       <%= f.label :登録住所から探す %>
       </div>
       <div>
-        <%= f.select :shopping_addresses, options_from_collection_for_select(@shopping_addresses.all, :id, :address_display) %>
+        <%= f.select :shopping_addresses, options_from_collection_for_select(@shopping_addresses, :id, :address_display) %>
       </div>
     </div>
     
@@ -54,7 +54,7 @@
       </div>
       <div>
         <%= f.label :住所 %>
-        <%= f.text_field :shopping_address %>
+        <%= f.text_field :address %>
       </div>
       <div>
         <%= f.label :宛名 %>
