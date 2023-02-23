@@ -13,20 +13,23 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-md bg-dark">
-        <button>
+        <h2>
           <% if admin_signed_in? %>
-            <%= link_to 'NaganoCAKE', admin_root_path %>
+            <%= link_to 'NaganoCAKE', admin_root_path, class:'text-light' %>
           <% else %>
-            <%= link_to 'NaganoCAKE', root_path %>
+            <%= link_to 'NaganoCAKE', root_path, class:'text-light' %>
           <% end %>
-        </button>
+        </h2>
+        <div>
+          <% if customer_signed_in? %>
+            <p class='text-light'>ようこそ、<%= current_customer.last_name %>さん！</p>
+          <% end %>
+        </div>
 
         <div class='collapse navbar-collapse flex-column'>
           <ul class='nav navbar-nav ml-auto'>
             <% if customer_signed_in? %>
             <!--顧客がログインしているとき-->
-            <p>ようこそ、<%= current_customer.last_name %>さん！</p>
-
             <button class='nav-item'>
               <%= link_to "マイページ", customers_my_page_path %>
             </button>
@@ -84,18 +87,13 @@
           </div>
         </div>
       </nav>
-
     </header>
 
     <%= yield %>
 
-     <footer class="navbar navbar-dark bg-dark text-white">
-      <div class="container">
-        <div class="row">
-          <div class="col m-auto">
-            <p>ながのCAKE</p>
-          </div>
-        </div>
+    <footer>
+      <div class='bg-dark p-auto py-4 text-white text-center'>
+        <p>ながのCAKE</p>
       </div>
     </footer>
   </body>

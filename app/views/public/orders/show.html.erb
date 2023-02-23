@@ -1,75 +1,71 @@
 <div class='container'>
-    
   <div class='row'>
-    <h3>注文履歴詳細</h3>
+    <h3 class='m-4'>注文履歴詳細</h3>
   </div>
   
   <div class='row'>
-    
-    <div class='col-6'>
-      <table class='table caption-top'>
-        <caption>注文情報</caption>
+    <div class='col-7'>
+      <h5 class='font-weight-bolder'>注文情報</h5>
+      <table class='table table-bordered'>
         <tr>
           <td class='table-secondary'>注文日</td>
-          <td><%# @order.created_at.strftime('%Y/%m/%d') %></td>
+          <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
         <tr>
           <td class='table-secondary'>配送先</td>
-          <td>〒<%# @order.postal_code %><br><%# @order.address %><br><%# @order.mane %></td>
+          <td>〒<%= @order.postal_code %><br><%= @order.address %><br><%= @order.name %></td>
         </tr>
         <tr>
           <td class='table-secondary'>支払方法</td>
-          <td><%# @order.payment_method %></td>
+          <td><%= @order.payment_method_i18n %></td>
         </tr>
         <tr>
           <td class='table-secondary'>ステータス</td>
-          <td><%# @order.order_status %></td>
+          <td><%= @order.order_status_i18n %></td>
         </tr>
       </table>
     </div>
     
-    <div class='col-4 ml-2'>
-      <table class='table caption-top'>
-        <caption>請求情報</caption>
+    <div class='col-4 ml-1'>
+      <h5 class='font-weight-bolder'>請求情報</h5>
+      <table class='table table-bordered'>
         <tr>
           <td class='table-secondary'>商品合計</td>
-          <td><%# @order.total_payment %>-<%# @order.postage %></td>
+          <td class='text-right'><%= @order.total_payment - 800 %></td>
         </tr>
         <tr>
           <td class='table-secondary'>送料</td>
-          <td><%# @order.postage %></td>
+          <td class='text-right'><%= @order.postage %></td>
         </tr>
         <tr>
           <td class='table-secondary'>ご請求額</td>
-          <td><%# @order.total_payment %></td>
+          <td class='text-right'><%= @order.total_payment %></td>
         </tr>
       </table>
     </div>
-    
   </div>
   
-  <div class='row'>
-    <table class='table caption-top'>
-      <caption>注文内容</caption>
+  <div class='row flex-column ml-1'>
+    <h5 class='font-weight-bolder'>注文内容</h5>
+    <table class='table table-bordered col-8 text-center'>
       <thead class='table-secondary'>
         <tr>
-          <th>商品</th>
-          <th>単価(税込)</th>
-          <th>個数</th>
-          <th>小計</th>
+          <th class='col-4'>商品</th>
+          <th class='col-1'>単価(税込)</th>
+          <th class='col-1'>個数</th>
+          <th class='col-1'>小計</th>
         </tr>
       </thead>
       <tbody>
-        <%# @order_details.each do |order_detail| %>
+        <% @order.order_details.each do |order_detail| %>
         <tr>
-          <td><%# order_ditail.product.name %></td>
-          <td><%# order_ditail.order_price %></td>
-          <td><%# order_ditail.quantity %></td>
-          <td><%# order_ditail.subtotal %></td>
+          <td class='text-left'><%= order_detail.product.name %></td>
+          <td class='text-right'><%= order_detail.order_price %></td>
+          <td class='text-right'><%= order_detail.quantity %></td>
+          <td class='text-right'><%= order_detail.subtotal %></td>
         </tr>
-        <%# end %>
+        <% end %>
       </tbody>
     </table>
   </div>
-  
 </div>

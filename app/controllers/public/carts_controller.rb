@@ -1,22 +1,22 @@
 class Public::CartsController < ApplicationController
+  before_action :authenticate_customer!
 
   def create
-    @cart = Cart.new(cart_params)
-    if @cart.save
-     redirect_to carts_path
+    @cart = current_customer.carts.new(cart_params)
+    my_cart = current_customer.carts.find_by(product_id: @cart.product_id)
+    if my_cart
+      new_quantity = my_cart.quantity + @cart.quantity
+      my_cart.update(quantity: new_quantity)
     else
-     @product = Product.find(params[:cart][:product_id])
-     @product_genres = ProductGenre.all
-     render template: "public/products/show"
+      @cart.save
     end
+    redirect_to carts_path
   end
   
-  
-
   def index
    @carts = current_customer.carts
    #↓合計金額を出すアクショ↓
-   @total_price = 0 #0から始まるため「0」で指定。
+   @total_price = 0 #0から始まるため「0」で指定
 
   end
 
@@ -35,8 +35,8 @@ class Public::CartsController < ApplicationController
 
   #商品数の変更
   def update
-    @cart = Cart.find(params[:id])
-    @cart.update!(cart_params)
+    cart = Cart.find(params[:id])
+    cart.update(cart_params)
     redirect_to carts_path
   end
 
