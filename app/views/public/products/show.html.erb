@@ -1,23 +1,8 @@
 <div class="container my-5">
   <div class="row">
     <div class="col-2">
-      <!--部分レイアウトで作成する-->
-      <table class="table">
-        <thead>
-          <tr class='text-center'>ジャンル検索</tr>
-        </thead>
-        <tbody>
-          <% @product_genres.each do |product_genre| %>
-          <tr>
-            <th>
-              <%= link_to "/" do %>
-                <%= product_genre.name %>
-              <% end %>
-            </th>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <!--[ジャンル]部分レイアウト--->
+      <%= render 'genres_search', product_genres: @product_genres %>
     </div>
     
     <div class="col-4">

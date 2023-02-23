@@ -1,0 +1,11 @@
+      <h4 class='my-4'>商品一覧（全 <%= Product.count %> 件）</h4>
+      <div class="row">
+        <% products.each do |product| %>
+        <div class="col-3">
+          <%= image_tag product.get_image, size: '200x150' %>
+          <p><%= link_to product_path(product) do %><%= product.name %><% end %></p>
+          <p>¥<%= product.price %></p>
+        </div>
+        <% end %>
+      </div>
+      <%= paginate products %>

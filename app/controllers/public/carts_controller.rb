@@ -10,8 +10,8 @@ class Public::CartsController < ApplicationController
      render template: "public/products/show"
     end
   end
-  
-  
+
+
 
   def index
    @carts = current_customer.carts
