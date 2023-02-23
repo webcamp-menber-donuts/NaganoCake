@@ -1,4 +1,5 @@
 class Public::CartsController < ApplicationController
+  before_action :authenticate_customer!
 
   def create
     @cart = Cart.new(cart_params)
@@ -10,8 +11,8 @@ class Public::CartsController < ApplicationController
      render template: "public/products/show"
     end
   end
-  
-  
+
+
 
   def index
    @carts = current_customer.carts
