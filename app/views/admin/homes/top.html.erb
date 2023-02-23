@@ -11,19 +11,26 @@
                 <th>注文ステータス</th>
             </tr>
           </thead>
-                        
+
           <tbody>
-              <% @customers.each do |customer| %>
+              <% @orders.each do |order| %>
             <tr>
-                <th><%#= link_to customer.orders.created_at, @order.created_at %>※注文日時</th>
-                <th><%= customer.last_name %><%= customer.fast_name %></th>
-                <th><%#= customer.customer.order_details.quantity %>※注文個数</th>
-                <th><%#= customer.customer.order_status. %>※注文ステータス</th>
+                <th>
+                  <%= link_to admin_order_path(order) do %> 
+                  <%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+                  <% end %>
+                </th>
+                <th><%= order.customer.last_name %><%= order.customer.fast_name %></th>
+                <th><%= order.product_quantity %></th>
+                <th><%= order.order_status_i18n %></th>
             </tr>
             <% end %>
           </tbody>
         </table>
-            <%= paginate @customers %>
+        <div class="mx-auto" style="width: 200px;">
+            <%= paginate @orders %>
+          
+        </div>
           
         <br>
         <p>※作業用に仮で置いてます</p>

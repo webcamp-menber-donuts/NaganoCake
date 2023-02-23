@@ -2,12 +2,12 @@
     <div class="row">
         <div class="col">
             <h2><%= @customer.last_name %><%= @customer.fast_name %>さんの会員情報編集</h2>
-            <table class="table">
+            <%= form_with model: @customer, url: admin_customer_path(@customer),method: :patch, local:true do |f| %>
+                <table class="table">
                     <tr>
                         <th>会員ID</th>
                         <td><%= @customer.id %></td>
                     </tr>
-                <%= form_with model:@customer, url:admin_customer_path(@customer), local:true,method: :patch do |f| %>
                     <tr>
                         <th><%= f.label :氏名 %></th>
                         <td><%= f.text_field :last_name %></td>
@@ -45,11 +45,10 @@
                     </tr>
                     <tr>
                         <th></th>
-                        <th><%= f.submit "変更を保存",method: :patch, class:'btn btn-success mb-2' %></th>
+                        <th><%= f.submit "変更を保存", class:'btn btn-success mb-2' %></th>
                     </tr>
-                <% end %>
-               
-            </table>
+                </table>
+            <% end %>
         </div>
     </div>
 </div>
