@@ -1,4 +1,5 @@
 class Public::CartsController < ApplicationController
+  before_action :authenticate_customer!
 
   def create
     @cart = current_customer.carts.new(cart_params)
@@ -11,7 +12,6 @@ class Public::CartsController < ApplicationController
     end
     redirect_to carts_path
   end
-
   
   def index
    @carts = current_customer.carts

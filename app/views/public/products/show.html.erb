@@ -19,17 +19,17 @@
         </tbody>
       </table>
     </div>
-    
+
     <div class="col-4">
       <%= image_tag @product.get_image, size: '320x240' %>
     </div>
-      
+
     <div class="col-6">
       <h4><strong><%= @product.name %></strong></h4>
       <p><%= @product.introduction %></p><br>
-      
+
         <h4 class='row my-4'>¥<%= @product.price.to_s :delimited %>(税込)</h4>
-        
+
         <%= form_with model: @cart,url: carts_path, local: true do |f| %>
         <div class='row my-4'>
           <div class='col-4'>
