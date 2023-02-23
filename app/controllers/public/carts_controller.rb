@@ -33,8 +33,8 @@ class Public::CartsController < ApplicationController
 
   #商品数の変更
   def update
-    @cart = Cart.find(params[:id])
-    @cart.update!(cart_params)
+    cart = Cart.find(params[:id])
+    cart.update(cart_params)
     redirect_to carts_path
   end
 
