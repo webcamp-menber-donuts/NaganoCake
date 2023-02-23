@@ -1,0 +1,16 @@
+      <table class="table">
+        <thead>
+          <tr>ジャンル検索</tr>
+        </thead>
+        <tbody>
+          <% product_genres.each do |product_genre| %>
+          <tr>
+            <th>
+              <%= link_to "/" do %>
+                <%= product_genre.name %>
+              <% end %>
+            </th>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>

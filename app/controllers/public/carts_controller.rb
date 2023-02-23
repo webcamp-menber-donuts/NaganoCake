@@ -12,7 +12,7 @@ class Public::CartsController < ApplicationController
     end
     redirect_to carts_path
   end
-  
+
   def index
    @carts = current_customer.carts
    #↓合計金額を出すアクショ↓

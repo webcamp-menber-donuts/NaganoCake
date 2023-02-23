@@ -13,12 +13,12 @@
 
   <div class='row'>
     <div class='col-10'>
-      <p>新規の商品４つをrenderで配置したい</p>
+      <%= render 'public/products/index', products: @products %>
     </div>
   </div>
 
   <div class='row'>
-    <%= link_to "すべての商品を見る＞" %>
+    <%= link_to "すべての商品を見る＞", products_path %>
   </div>
 
 </div>
