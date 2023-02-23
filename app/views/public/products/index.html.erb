@@ -8,6 +8,7 @@
     <div class="col-9 offset-1">
      <!--[productのindex]部分レイアウト-->
      <%= render 'index', products: @products %>
+     <%= paginate @products %>
     </div>
   </div>
 </div>
