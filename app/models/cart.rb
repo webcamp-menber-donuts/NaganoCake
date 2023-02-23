@@ -3,7 +3,7 @@ class Cart < ApplicationRecord
   belongs_to :product
 
   def subtotal #商品小計
-    product.add_tax_price * (quantity.to_i)
+    product.add_tax_price * quantity
   end
 
 end
