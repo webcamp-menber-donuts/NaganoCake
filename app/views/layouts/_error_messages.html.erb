@@ -1,0 +1,15 @@
+<% if model.errors.any? %>
+  <div>
+      <h3><%= pluralize(model.errors.count, "error") %> prohibited this obj from being saved:</h3>
+    <ul>
+      <% model.errors.full_messages.each do |message| %>
+        <li class='error-message'><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<!--エラーを出したい部分に以下を追加-->
+<%#= render 'layouts/error_messages', model: @XXX %>
+<!--model:の後ろのXXXXには@customerなどフォームに渡す変数を記述 -->

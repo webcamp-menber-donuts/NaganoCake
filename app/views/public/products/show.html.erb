@@ -34,7 +34,6 @@
         <div class='row my-4'>
           <div class='col-4'>
             <%= f.select :quantity, *[1..10] %><%= f.label :個 %>
-            <%= f.hidden_field :customer_id, :value => current_customer.id %>
             <%= f.hidden_field :product_id, :value => @product.id %>
           </div>
           <div class='col-4'>
