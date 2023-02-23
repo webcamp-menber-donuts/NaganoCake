@@ -1,39 +1,40 @@
 <div class="container">
-  <div class="row">
-
-
-    <div class="col-9 offset-1">
-      <h3 class='col-4 text-left m-4'>商品一覧</h3>
-      <%= link_to new_admin_product_path do %>
-      <i class="fas fa-plus-circle fa-2x"></i>
-      <% end %>
-
-  <div class='row mx-1'>
-    <table class="table table-bordered text-center">
-      <thead class='table-secondary'>
-          <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @products.each do |product| %>.
+    <div class="row">
+  
+  
+      <div class="col-9 offset-1">
+        <h3 class='col-4 text-left m-4'>商品一覧</h3>
+        <%= link_to new_admin_product_path do %>
+        <i class="fas fa-plus-circle fa-2x"></i>
+        <% end %>
+  
+    <div class='row mx-1'>
+      <table class="table table-bordered text-center">
+        <thead class='table-secondary'>
             <tr>
-              <td><%= product.id %></td>
-              <td><%= link_to admin_product_path(product) do %>
-                <%= product.name %>
-                <% end %>
-              </td>
-              <td><%= product.price.to_s(:delimited) %>円</td>
-              <td><%= product.product_genre.name %></td>
-              <td><%= product.is_sale ? '販売中' : '売切れ' %></td>
+              <th>商品ID</th>
+              <th>商品名</th>
+              <th>税抜価格</th>
+              <th>ジャンル</th>
+              <th>ステータス</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @products.each do |product| %>.
+              <tr>
+                <td><%= product.id %></td>
+                <td><%= link_to admin_product_path(product) do %>
+                  <%= product.name %>
+                  <% end %>
+                </td>
+                <td><%= product.price.to_s(:delimited) %>円</td>
+                <td><%= product.product_genre.name %></td>
+                <td><%= product.is_sale ? '販売中' : '売切れ' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
