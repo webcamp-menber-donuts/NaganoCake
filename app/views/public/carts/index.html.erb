@@ -21,17 +21,17 @@
         <% @carts.each do |cart| %>
         <tr>
           <td class='text-left'><%= image_tag cart.product.get_image, size: '40x30' %><%= cart.product.name %></td>
-          <td class='text-right'><%= cart.product.with_tax_price %></td>
+          <td class='text-right'><%= cart.subtotal.to_s :delimited %></td>
           <%= form_with model: cart,url: cart_path(cart), method: :patch, local: true do |f| %>
             <td class='text-right flex-column'>
               <%= f.select :quantity, *[1..10] %><%= f.label :個 %>
               <%= f.hidden_field :customer_id, :value => current_customer.id %>
               <%= f.hidden_field :product_id, :value => cart.product_id %>
-              <%= f.submit :変更, class: 'btn btn-success' %>
+              <%= f.submit :変更, class:'btn btn-success' %>
             </td>
           <% end %>
           <td class='text-right'>
-            <%= cart.subtotal.to_s(:delimited) %> <!--to_s(:delimited)は数字を3桁数字にするもの-->
+            <%= cart.subtotal.to_s :delimited %> <!--to_s :delimited は数字を3桁数字にするもの-->
           </td>
             <!--合計金額を出すための計算式↓ each文の中で行うため、ここに記載。72行目に合計金額-->
             <% @total_price += cart.subtotal %>
