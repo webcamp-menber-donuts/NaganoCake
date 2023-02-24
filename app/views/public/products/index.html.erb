@@ -1,17 +1,14 @@
 <div class="container">
   <div class="row">
-    
     <div class="col-2 my-4">
-      <!--[ジャンル]部分レイアウト--->
+        <!--[ジャンル]部分レイアウト--->
       <%= render 'genres_search', product_genres: @product_genres %>
     </div>
     <div class="col-9 offset-1">
-     <!--[productのindex]部分レイアウト-->
-
-     <h4 class='my-4'>商品一覧（全 <%= Product.count %> 件）</h4>
-
-     <%= render 'index', products: @products %>
-     <%= paginate @products %>
+       <!--[productのindex]部分レイアウト-->
+      <h4 class='my-4'>商品一覧（全 <%= Product.count %> 件）</h4>
+      <%= render 'index', products: @products %>
+      <%= paginate @products %>
     </div>
   </div>
 </div>
