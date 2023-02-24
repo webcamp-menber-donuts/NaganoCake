@@ -21,7 +21,7 @@ class Public::CartsController < ApplicationController
   end
 
   def index
-   @carts = current_customer.carts 
+   @carts = current_customer.carts
    #↓合計金額を出すアクショ↓
    @total_price = 0 #0から始まるため「0」で指定
 
