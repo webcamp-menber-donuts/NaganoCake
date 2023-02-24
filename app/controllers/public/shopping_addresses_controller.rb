@@ -13,7 +13,8 @@ class Public::ShoppingAddressesController < ApplicationController
     if @shopping_address.save
       redirect_to shopping_addresses_path
     else
-      @shopping_addresses = ShoppingAddress.all
+      @customer = current_customer
+      @shopping_addresses = @customer.shopping_addresses
       render 'index'
     end
   end
