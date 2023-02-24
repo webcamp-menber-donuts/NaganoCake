@@ -3,7 +3,7 @@
     <h3 class='m-4'>会員情報編集</h3>
   </div>
   <%= render 'layouts/error_messages', model: @customer %>
-  
+
   <div class='row'>
     <%= form_with model: @customer, url:customers_information_path, local:true do |f| %>
     <table class='table table-borderless'>
