@@ -2,6 +2,7 @@
 
 <div class="form-genre">
 <%= form_with model: [:admin, @genre], local: true do |f| %>
+<%= render "error_messages", genre: @genre %>
   <%= f.label :ジャンル名 %>
   <%= f.text_field :name %>
   <%= f.submit :新規登録, class: 'btn btn-success' %>
@@ -17,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @genres.each do |product_genre| %>.
+    <% @genres.each do |product_genre| %>
       <tr>
         <td><%= product_genre.name %></td>
         <td></td>

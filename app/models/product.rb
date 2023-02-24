@@ -12,5 +12,7 @@ class Product < ApplicationRecord
   def add_tax_price
       (self.price * 1.10).round
   end
+  
+  validates :name, :image,:introduction,:price, presence: true #空白でない
 
 end

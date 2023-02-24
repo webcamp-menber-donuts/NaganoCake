@@ -22,7 +22,7 @@ class Public::CustomersController < ApplicationController
     if @customer.update(is_deleted: true)
       reset_session
       flash[:notice] = "ながのCAKEを退会しました"
-      redirect_to new_customer_registration_path
+      redirect_to root_path
     end
   end
   

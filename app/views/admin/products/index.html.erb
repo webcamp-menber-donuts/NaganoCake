@@ -1,7 +1,6 @@
 <div class="container">
     <div class="row">
   
-  
       <div class="col-9 offset-1">
         <h3 class='col-4 text-left m-4'>商品一覧</h3>
         <%= link_to new_admin_product_path do %>
@@ -20,7 +19,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @products.each do |product| %>.
+            <% @products.each do |product| %>
               <tr>
                 <td><%= product.id %></td>
                 <td><%= link_to admin_product_path(product) do %>

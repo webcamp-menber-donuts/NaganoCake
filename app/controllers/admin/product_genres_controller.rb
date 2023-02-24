@@ -1,5 +1,5 @@
 class Admin::ProductGenresController < ApplicationController
-
+  before_action :authenticate_admin!, except: [:top]
   def index
     @genres = ProductGenre.all
     @genre = ProductGenre.new
