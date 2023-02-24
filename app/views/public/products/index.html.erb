@@ -7,7 +7,9 @@
     </div>
     <div class="col-9 offset-1">
      <!--[productのindex]部分レイアウト-->
+    <h4 class='my-4'>商品一覧（全 <%= Product.count %> 件）</h4>
      <%= render 'index', products: @products %>
+     <%= paginate @products %>
     </div>
   </div>
 </div>
