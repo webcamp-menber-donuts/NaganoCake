@@ -6,11 +6,18 @@ class Public::CartsController < ApplicationController
     my_cart = current_customer.carts.find_by(product_id: @cart.product_id)
     if my_cart
       new_quantity = my_cart.quantity + @cart.quantity
-      my_cart.update(quantity: new_quantity)
+      if my_cart.update(quantity: new_quantity)
+        redirect_to carts_path
+      else
+        @product_genres = ProductGenre.all
+        @product = Product.find(params[:cart][:product_id])
+        @cart_error = my_cart
+        render template: "public/products/show"
+      end
     else
       @cart.save
+      redirect_to carts_path
     end
-    redirect_to carts_path
   end
 
   def index

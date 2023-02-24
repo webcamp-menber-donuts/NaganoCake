@@ -9,28 +9,27 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <header>
-      <nav class="navbar navbar-expand-md bg-dark">
-        <h2>
+    <header> 
+      <nav class='navbar navbar-expand-md bg-dark'>
+        <h2 class='justify-content-center'>
+          <i class="fas fa-store text-light"></i>
           <% if admin_signed_in? %>
             <%= link_to 'NaganoCAKE', admin_root_path, class:'text-light' %>
           <% else %>
             <%= link_to 'NaganoCAKE', root_path, class:'text-light' %>
           <% end %>
         </h2>
-        <div>
+        <div class='navbar-collapse justify-content-center'>
           <% if customer_signed_in? %>
             <p class='text-light'>ようこそ、<%= current_customer.last_name %>さん！</p>
           <% end %>
         </div>
-
-        <div class='collapse navbar-collapse flex-column'>
+        <div class='collapse navbar-collapse flex-column order-md-last align-items-end'>
           <ul class='nav navbar-nav ml-auto'>
             <% if customer_signed_in? %>
             <!--顧客がログインしているとき-->
-            <button class='nav-item'>
+            <button class='nav-item text-dark'>
               <%= link_to "マイページ", customers_my_page_path %>
             </button>
             <button class='nav-item'>
@@ -93,7 +92,7 @@
 
     <footer>
       <div class='bg-dark p-auto py-4 text-white text-center'>
-        <p>ながのCAKE</p>
+        <p>ながのCAKE <i class="fas fa-utensils"></i></p>
       </div>
     </footer>
   </body>

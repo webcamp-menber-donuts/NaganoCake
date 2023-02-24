@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
   
   def new
     @order = Order.new
@@ -38,29 +39,28 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     if @order.save
       redirect_to orders_thanx_path
+      #カートから注文詳細へ移し替え
+      carts = current_customer.carts.all
+      carts.each do |cart|
+        OrderDetail.create(
+          order_id: @order.id,
+          product_id: cart.product.id,
+          quantity: cart.quantity,
+          order_price: cart.product.add_tax_price
+        )
+      end
+      carts.destroy_all #カートを空にする
     else
-     render :new
-    end  
-  
-    #カートから注文詳細へ移し替え
-    carts = current_customer.carts.all
-    carts.each do |cart|
-      OrderDetail.create(
-        order_id: @order.id,
-        product_id: cart.product.id,
-        quantity: cart.quantity,
-        order_price: cart.product.add_tax_price
-      )
+      @shopping_addresses = current_customer.shopping_addresses
+      render 'new'
     end
- 
-    carts.destroy_all #カートを空にする
   end
   
   def thanx
   end
 
   def index
-    @orders = current_customer.orders
+    @orders = current_customer.orders.order(created_at: :desc)
     
   end
 
