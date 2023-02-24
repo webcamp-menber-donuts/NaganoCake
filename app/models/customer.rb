@@ -11,7 +11,7 @@ class Customer < ApplicationRecord
   
   #フルネーム
   def full_name
-  last_name + ' ' + fast_name
+    last_name + ' ' + fast_name
   end
 
   validates :last_name, :fast_name,:email,:address, presence: true #空白でない
