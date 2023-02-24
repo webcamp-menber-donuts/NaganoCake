@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 2023_02_19_040849) do
     t.integer "quantity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "customer_id"
     t.integer "product_id"
+    t.integer "customer_id"
   end
 
   create_table "customers", force: :cascade do |t|
