@@ -15,9 +15,9 @@
         <h2 class='justify-content-center'>
           <i class="fas fa-store text-light"></i>
           <% if admin_signed_in? %>
-            <%= link_to 'NaganoCAKE', admin_root_path, class:'text-light' %>
+            <%= link_to 'ながのCAKE', admin_root_path, class:'text-light' %>
           <% else %>
-            <%= link_to 'NaganoCAKE', root_path, class:'text-light' %>
+            <%= link_to 'ながのCAKE', root_path, class:'text-light' %>
           <% end %>
         </h2>
         <div class='navbar-collapse justify-content-center'>
@@ -29,138 +29,86 @@
           <ul class='nav navbar-nav ml-auto'>
             <% if customer_signed_in? %>
             <!--顧客がログインしているとき-->
-
             <li>
-             <%= link_to customers_my_page_path class: 'nav-link text-light' do%>
-               <i class="fas fa-user"></i> マイページ
-             <%end%>
+              <%= link_to customers_my_page_path, class:'nav-link text-light' do %>
+                 <i class="fas fa-user"></i> マイページ
+              <% end %>
             </li>
-            <!--<button class='nav-item text-dark'>-->
-            <!--  <%#= link_to "マイページ", customers_my_page_path %>-->
-            <!--</button>-->
-
             <li>
-             <%= link_to products_path class: 'nav-link text-light' do%>
-               <i class="fas fa-gift"></i> 商品一覧
-             <%end%>
+              <%= link_to products_path, class:'nav-link text-light' do %>
+                <i class="fas fa-gift"></i> 商品一覧
+              <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to '商品一覧', products_path %>
-            <!--</button>-->
-
             <li>
-             <%= link_to carts_path class: 'nav-link text-light' do%>
-               <i class="fas fa-shopping-cart"></i> カート
-             <%end%>
+              <%= link_to carts_path, class:'nav-link text-light' do %>
+                <i class="fas fa-shopping-cart"></i> カート
+              <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to 'カート', carts_path %>
-            <!--</button>-->
-
             <li>
-             <%= link_to destroy_customer_session_path, method: :delete,class: 'nav-link text-light' do%>
-               <i class="fas fa-sign-out-alt"></i> ログアウト
-             <%end%>
+              <%= link_to destroy_customer_session_path, method: :delete, class:'nav-link text-light' do %>
+                <i class="fas fa-sign-out-alt"></i> ログアウト
+              <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-            <%#= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-            <!--</button>-->
-
+            
             <% elsif admin_signed_in? %>
             <!--管理者がログインしているとき-->
-
             <li>
-             <%= link_to admin_products_path class: 'nav-link text-light' do%>
+              <%= link_to admin_products_path, class:'nav-link text-light' do %>
                 <i class="fas fa-gift"></i> 商品一覧
-             <%end%>
+              <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to '商品一覧', admin_products_path %>
-            <!--</button>-->
-
             <li>
-             <%= link_to admin_customers_path class: 'nav-link text-light' do%>
+              <%= link_to admin_customers_path, class:'nav-link text-light' do %>
                 <i class="fas fa-users"></i> 会員一覧
-             <%end%>
+             <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to "会員一覧", admin_customers_path %>
-            <!--</button>-->
-
             <li>
-             <%= link_to admin_root_path class: 'nav-link text-light' do%>
-                <i class="far fa-receipt"></i> 注文履歴一覧
-             <%end%>
+              <%= link_to admin_root_path, class: 'nav-link text-light' do %>
+                <i class="far fa-list-alt"></i> 注文履歴一覧
+              <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to "注文履歴一覧", admin_root_path %>
-            <!--</button>-->
-
-             <li>
-             <%= link_to admin_product_genres_path class: 'nav-link text-light' do%>
-                <i class="fas fa-shopping-basket"></i> ジャンル一覧
-             <%end%>
-            </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to "ジャンル一覧", admin_product_genres_path %>
-            <!--</button>-->
-
             <li>
-             <%= link_to destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do%>
+             <%= link_to admin_product_genres_path, class:'nav-link text-light' do %>
+              <i class="fas fa-shopping-basket"></i> ジャンル一覧
+             <% end %>
+            </li>
+            <li>
+             <%= link_to destroy_admin_session_path, method: :delete,class:'nav-link text-light' do%>
                <i class="fas fa-sign-out-alt"></i> ログアウト
-             <%end%>
+             <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-            <%#= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-            <!--</button>-->
-
+            
             <% else %>
               <!--ログインしていないとき-->
-
             <li>
-             <%= link_to about_path class: 'nav-link text-light' do%>
-               <i class="fas fa-bell"></i> About
-             <%end%>
+              <%= link_to about_path, class:'nav-link text-light' do %>
+                <i class="fas fa-bell"></i> About
+              <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to "About", about_path %>
-            <!--</button>-->
-
             <li>
-             <%= link_to products_path class: 'nav-link text-light' do%>
+             <%= link_to products_path, class:'nav-link text-light' do %>
                <i class="fas fa-gift"></i> 商品一覧
              <%end%>
             </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to '商品一覧', products_path %>
-            <!--</button>-->
 
              <li>
-             <%= link_to new_customer_registration_path class: 'nav-link text-light' do%>
+             <%= link_to new_customer_registration_path, class:'nav-link text-light' do %>
                <i class="fas fa-user-plus"></i> 新規登録
-             <%end%>
+             <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to "新規登録", new_customer_registration_path %>
-            <!--</button>-->
-
-             <li>
-             <%= link_to new_customer_session_path class: 'nav-link text-light' do%>
-               <i class="fas fa-user-unlock"></i> ログイン
-             <%end%>
+            <li>
+              <%= link_to new_customer_session_path, class:'nav-link text-light' do %>
+                <i class="fas fa-sign-in-alt"></i> ログイン
+              <% end %>
             </li>
-            <!--<button class='nav-item'>-->
-              <%#= link_to "ログイン", new_customer_session_path %>
-            <!--</button>-->
             <% end %>
           </ul>
-
           <!--検索フォーム-->
           <div>
-          <%= form_tag("/", :method => "get") do %>
-           <%= text_field_tag :search %>
-          <%= submit_tag "Search" ,:username => nil ,class: "button is-info"%>
-          <% end %>
+            <%= form_tag("/", :method => "get") do %>
+              <%= text_field_tag :search %>
+              <%= submit_tag "Search", :username => nil, class:"btn btn-light" %>
+            <% end %>
           </div>
         </div>
       </nav>
