@@ -9,7 +9,9 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_details = OrderDetail.where(order_id: @order.id)
     #注文ステータスの変更
-    if @order.update(order_params)
+    #注文ステータスを入金確認に変更したら、製作ステータスを製作待ちに変更
+    if  @order.update(order_params)
+      @order_details.update_all(product_status: 1) if @order.order_status == "payment_confirmation"
       flash[:notice] = "注文ステータスを更新しました"
       redirect_to request.referer
     else
