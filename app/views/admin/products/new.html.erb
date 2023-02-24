@@ -1,6 +1,8 @@
 <h4>商品新規登録</h4>
 <div class="form-product">
   <%= form_with model: [:admin, @product], local: true do |f| %>
+  <%= render "error_messages", product: @product %>
+  
      <div>
        <%= f.label :商品画像 %>
        <%= f.file_field :image %>

@@ -1,4 +1,5 @@
 class Admin::ProductsController < ApplicationController
+  before_action :authenticate_admin!, except: [:top]
   def new
     @product = Product.new
   end
@@ -8,7 +9,7 @@ class Admin::ProductsController < ApplicationController
      if  @product.save
        redirect_to admin_product_path(@product)
      else
-       render :index
+       render :new
      end
   end
 
