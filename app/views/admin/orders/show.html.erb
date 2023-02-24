@@ -54,7 +54,7 @@
                   <% @order_details.each do |order_detail| %>
                 <tr>
                     <th><%= order_detail.product.name %></th>
-                    <th><%= order_detail.product.price.to_s(:delimited) %></th>
+                    <th><%= order_detail.product.add_tax_price.to_s(:delimited) %></th>
                     <th><%= order_detail.quantity %></th>
                     <th><%= order_detail.order_price.to_s(:delimited) %></th>
                     <th>
