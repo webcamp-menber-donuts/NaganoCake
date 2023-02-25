@@ -1,2 +1,69 @@
-<h1>Public::Carts#index</h1>
-<p>Find me in app/views/public/carts/index.html.erb</p>
+<div class='container'>
+  <div class='row'>
+    <h3 class='col-4 text-left m-4'>ショッピングカート</h3>
+  </div>
+
+  <div class='text-right m-2'>
+    <!-- カートを空にする機能とボタン  -->
+    <%= link_to "カートを空にする", carts_destroy_all_path, method: :delete, class:"btn btn-danger" %>
+  </div>
+  <div class='row mx-1'>
+    <table class="table table-bordered text-center">
+      <thead class='table-secondary'>
+        <tr>
+          <th class='col-3'>商品名</th>
+          <th class='col-1'>単価（税込）</th>
+          <th class='col-1'>数量</th>
+          <th class='col-1'>小計</th>
+          <th class='col-1'></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @carts.each do |cart| %>
+        <tr>
+          <td class='text-left'><%= image_tag cart.product.get_image, size: '40x30' %><%= cart.product.name %></td>
+          <td class='text-right'><%= cart.product.add_tax_price.to_s :delimited %></td>
+          <%= form_with model: cart, url: cart_path(cart), method: :patch, local: true do |f| %>
+            <td class='text-right flex-column'>
+              <%= f.select :quantity, *[1..20] %><%= f.label :個 %>
+              <%= f.submit :変更, class:'btn btn-success' %>
+            </td>
+          <% end %>
+          <td class='text-right'>
+            <%= cart.subtotal.to_s :delimited %>
+          </td>
+            <!--合計金額を出すための計算式↓ each文の中で行うため、ここに記載。72行目に合計金額-->
+            <% @total_price += cart.subtotal %>
+          <td>
+            <%= link_to '削除する', cart_path(cart.id), method: :delete,  class:'btn btn-danger' %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class='row mt-4'>
+    <div class='col-4'>
+    <%= link_to "買い物を続ける", root_path, class:'btn btn-primary px-3' %>
+    </div>
+    
+    <div class='col-4 text-center'>
+      <% if @carts.any? %>
+      <%= link_to "情報入力に進む", new_order_path, class:'btn btn-success px-4' %>
+      <% end %>
+    </div>
+    
+    <div class='col-4'>
+      <table class="table table-bordered">
+        <tr>
+         <td class='table-secondary text-center'>合計金額</td>
+         <td class='text-right'>
+           <%= @total_price.to_s(:delimited) %> <!--56行目に計算式ある、ここで表示。to_s(:delimited)は数字を3桁数字にするもの-->
+         </td>
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</div>

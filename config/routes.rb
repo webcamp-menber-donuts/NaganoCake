@@ -6,7 +6,7 @@ devise_for :customers,skip: [:passwords], controllers: {
   sessions: 'public/sessions'
 }
 scope module: :public do
-  get "/" => "homes#top"
+  root to: "homes#top"
   get "/about" => "homes#about"
   resources :products, only: [:index, :show]
   get "customers/my_page" => "customers#show"
@@ -14,11 +14,11 @@ scope module: :public do
   patch "customers/information" => "customers#update"
   get "customers/withdrawal_check" => "customers#withdrawal_check"
   patch "customers/withdrawal" => "customers#withdrawal"
-  resources :carts, only: [:index, :update, :create, :destroy]
   delete "carts/destroy_all" => "carts#destroy_all"
-  resources :orders, only: [:new, :create, :index, :show]
-  get "orders/check" => "orders#check"
+  resources :carts, only: [:index, :update, :create, :destroy]
+  post "orders/check" => "orders#check"
   get "orders/thanx" => "orders#thanx"
+  resources :orders, only: [:new, :create, :index, :show]
   resources :shopping_addresses, only: [:index, :edit, :create,:update, :destroy]
  end
 # 管理者用
@@ -34,6 +34,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
    resources :orders, only: [:show, :update]
    resources :order_details, only: [:update]
   end
-  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

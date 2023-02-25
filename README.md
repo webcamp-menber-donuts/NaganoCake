@@ -1,24 +1,31 @@
-# README
+# ながのCAKE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![top-page](https://user-images.githubusercontent.com/121597200/221186761-28be6cde-8a66-4f91-8805-dbf39d546464.png)
 
-Things you may want to cover:
+ながのCAKEへ、ようこそ！
 
-* Ruby version
+こちらは長野県にある小さな洋菓子店「ながのCAKE」の商品を通販するためのECサイトです。
 
-* System dependencies
+> DMM WEBCAMP のチーム開発用のECサイトですので、
+>
+> 残念ながらケーキは買えません。
 
-* Configuration
+## 開発環境
+Ruby on Rails
 
-* Database creation
+## 開発者
 
-* Database initialization
+チーム名
 
-* How to run the test suite
+**ドーナツ同好会**
 
-* Services (job queues, cache servers, search engines, etc.)
+メンバー
 
-* Deployment instructions
+- かいくん
+- じゅんじゅん
+- くせちゃん
+- ゆうさん
 
-* ...
+
+## 制作期間
+2023/2/12～2023/2/26
