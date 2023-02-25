@@ -1,56 +1,55 @@
-<h4>配送先登録/一覧</h4>
+<div class='container'>
+  <div class='row justify-content-center'>
+    <h3 class='col-4 text-left m-4'>配送先登録/一覧</h3>
+  </div>
+  <%= render 'layouts/error_messages', model: @shopping_address %>
 
-<% if @shopping_address.errors.any? %>
-  <%= @shopping_address.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @shopping_address.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+  <div class='row justify-content-center'>
+    <%= form_with model: @shopping_address, local: true do |f| %>
+    <div>
+      <%= f.label :郵便番号（ハイフンなし） %>
+      <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder:"0000000" %>
+    </div>
+    <div>
+      <%= f.label :住所 %>
+      <%= f.text_field :address %>
+    </div>
+    <div>
+      <%= f.label :宛名 %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.submit :新規登録, class: 'btn btn-success mb-4' %>
+    </div>
     <% end %>
-  </ul>
-<% end %>
-
-
-<%= form_with model: @shopping_address, local: true do |f| %>
-  <div>
-    <%= f.label :郵便番号（ハイフンなし） %>
-    <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder:"0000000" %>
   </div>
-
-  <div>
-    <%= f.label :住所 %>
-    <%= f.text_field :address %>
+  
+  <div class='row justify-content-center'>
+    <div class='col-8'>
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th class='col-1'>郵便番号</th>
+            <th class='col-4'>住所</th>
+            <th class='col-1'>宛名</th>
+            <th class='col-1'></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @shopping_addresses.each do |shopping_address| %>
+            <tr>
+              <td>〒<%= shopping_address.postal_code %></td>
+              <td><%= shopping_address.address %></td>
+              <td><%= shopping_address.name %></td>
+              <td>
+                <%= link_to '編集する', edit_shopping_address_path(shopping_address), class: "btn btn-sm btn-success mb-2" %><br>
+                <%= link_to '削除する', shopping_address_path(shopping_address.id), method: :delete, class: "btn btn-sm btn-danger"%>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
   </div>
-
-  <div>
-    <%= f.label :宛名 %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div>
-  <%= f.submit :新規登録, class: 'btn btn-success' %>
-  </div>
-<% end %>
-
-<table border="1">
-  <thead>
-    <tr>
-      <th>郵便番号</th>
-      <th>住所</th>
-      <th>宛名</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @shopping_addresses.each do |shopping_address| %>
-      <tr>
-        <td><%= shopping_address.postal_code %></td>
-        <td><%= shopping_address.address %></td>
-        <td><%= shopping_address.name %></td>
-        <td>
-          <%= link_to '編集する', edit_shopping_address_path(shopping_address), class: "btn btn-sm btn-success" %>
-          <%= link_to '削除する', shopping_address_path(shopping_address.id), method: :delete, class: "btn btn-sm btn-danger"%>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+</div>
