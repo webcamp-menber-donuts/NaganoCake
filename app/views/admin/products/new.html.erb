@@ -1,39 +1,47 @@
-<h4>商品新規登録</h4>
-<div class="form-product">
-  <%= form_with model: [:admin, @product], local: true do |f| %>
-  <%= render "error_messages", product: @product %>
+<div class="container">
+ <div class="row justify-content-center">
+  <h4>商品新規登録</h4>
+ </div>
+  <div class="row justify-content-center">
+   <div class="form-product">
+     <%= form_with model: [:admin, @product], local: true do |f| %>
+     <%= render "error_messages", product: @product %>
+     
+        <div>
+          <%= f.label :商品画像 %>
+          <%= f.file_field :image %>
+         </div>
+         <div>
+          <%= f.label :商品名 %>
+          <%= f.text_field :name %>
+         </div>
+         <div>
+          <%= f.label :商品説明 %>
+          <%= f.text_area :introduction %>
+         </div>
+         <div>
+         <%= f.label :ジャンル %>
+         <%= f.select :product_genre_id, ProductGenre.all.map { |product_genre| [product_genre.name, product_genre.id] } %>
+         </div>
+         <div>
+          <%= f.label :税抜価格 %>
+          <%= f.number_field :price %>円
+         </div>
+         <div>
+          <%= f.label :販売ステータス %>
+         </div>
+     　　<div>
+          <%= f.radio_button :is_sale, true %>
+          <%= f.label :is_sale, '販売中', value: true %>
+          </div>
+         <div>
+           <%= f.radio_button :is_sale, false %>
+           <%= f.label :done, '売切れ', value: false %>
+         </div>
+          <%= f.submit :新規登録, class: 'btn btn-success' %>
+     <% end %>
+   
+  </div>
   
-     <div>
-       <%= f.label :商品画像 %>
-       <%= f.file_field :image %>
-      </div>
-      <div>
-       <%= f.label :商品名 %>
-       <%= f.text_field :name %>
-      </div>
-      <div>
-       <%= f.label :商品説明 %>
-       <%= f.text_area :introduction %>
-      </div>
-      <div>
-      <%= f.label :ジャンル %>
-      <%= f.select :product_genre_id, ProductGenre.all.map { |product_genre| [product_genre.name, product_genre.id] } %>
-      </div>
-      <div>
-       <%= f.label :税抜価格 %>
-       <%= f.number_field :price %>円
-      </div>
-      <div>
-       <%= f.label :販売ステータス %>
-      </div>
-  　　<div>
-       <%= f.radio_button :is_sale, true %>
-       <%= f.label :is_sale, '販売中', value: true %>
-       </div>
-      <div>
-        <%= f.radio_button :is_sale, false %>
-        <%= f.label :done, '売切れ', value: false %>
-      </div>
-       <%= f.submit :新規登録, class: 'btn btn-success' %>
-  <% end %>
+ </div>
 </div>
